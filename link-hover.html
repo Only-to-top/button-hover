@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .my-btn {
+      margin: auto;
+      position: relative;
+      background-color: #4527a0;
+      color: #ffffff;
+      padding: 1em 2em;
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      border-radius: 10em;
+      display: block;
+      margin-top: 200px;
+      font-size: 18px;
+    }
+    .my-btn span {
+      position: relative;
+      pointer-events: none;
+    }
+    .my-btn::before {
+      content: '';
+      --size: 0; /* вводим переменнуб */
+      position: absolute;
+      left: var(--x); /* получаем переменную */
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      background: radial-gradient(circle closest-side, #9575cd, transparent);
+      transform: translate(-50%, -50%);
+      transition: width 200ms, height 200ms;
+    }
+    .my-btn:hover::before {
+      --size: 400px;
+    }
+  </style>
+</head>
+<body>
+  <button class="my-btn">
+    <span>
+      Текст кнопки
+    </span>
+  </button>
+  
+
+  <script>
+    document.querySelector('.my-btn').onmousemove = (e)=> {
+      const x = e.pageX - e.target.offsetLeft
+      const y = e.pageY - e.target.offsetTop
+      e.target.style.setProperty('--x', x + "px") // передаём в CSS
+      e.target.style.setProperty('--y', y + "px")
+    }
+  </script>
+</body>
+</html>
